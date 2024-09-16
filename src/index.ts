@@ -1,6 +1,6 @@
 import axios from "axios";
 import ProgressBar from 'progress';
-import { existsSync, mkdirSync, createWriteStream } from 'fs';
+import { existsSync, mkdirSync, createWriteStream, renameSync } from 'fs';
 import { join } from "path";
 import inquirer from "inquirer";
 import chalk from 'chalk';
@@ -453,21 +453,20 @@ const downSong = async (songs: { id: number, name: string }[], call: () => void)
       id,
       level: 'jymaster'
     })
-    if (!res || res.code !== 200) {
+    if (!res || res.code !== 200 || !res.data || !res.data[0] || !res.data[0].url) {
       isDownloaded(songs.length, call)
     } else {
       const url = res.data[0].url;
-      if (url) {
-        const type = url.split('.').pop();
-        await down(url, filePath + `.${type}`)
-      }
+      const type = url.split('.').pop();
+      await down(url, filePath + `.${type}`)
       isDownloaded(songs.length, call)
     }
   }
 }
 
 const down = async (url: string, filePath: string) => {
-  const writer = createWriteStream(filePath);
+  const tmpelPath = filePath + '.tmp'
+  const writer = createWriteStream(tmpelPath);
   const response = await axios({
     url,
     method: 'GET',
@@ -475,7 +474,11 @@ const down = async (url: string, filePath: string) => {
   });
   response.data.pipe(writer);
   return new Promise((resolve) => {
-    writer.on('finish', resolve);
+    writer.on('finish', async () => {
+      // 下载完成重命名文件
+      renameSync(tmpelPath, filePath);
+      resolve(null)
+    });
     writer.on('error', resolve);
   });
 }
