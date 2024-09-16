@@ -172,7 +172,7 @@ const getServerIpInput = async () => {
     }
   ]);
   if (data?.ip) {
-    log(`使用配置的服务地址: ${susMsg(server)}`)
+    log(`使用配置的服务地址: ${susMsg(data.ip)}`)
     server = `http://${data.ip}`
   } else {
     log(susMsg('使用默认在线服务地址'))
