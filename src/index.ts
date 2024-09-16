@@ -420,7 +420,9 @@ const downSong = async (songs: { id: number, name: string }[], call: () => void)
   for (let i = 0; i < songs.length; i++) {
     const element = songs[i];
     const id = element.id;
-    const name = element.name;
+    let name = element.name;
+
+    name = name.replace(/[\/\\]/g, '+');
 
     const fileNameNoHz = `${name}-${songer}`;
     const filePath = join(directory, fileNameNoHz);
