@@ -457,8 +457,8 @@ const downSong = async (songs: { id: number, name: string }[], call: () => void)
       isDownloaded(songs.length, call)
     } else {
       const url = res.data[0].url;
-      const type = url.split('.').pop();
       if (url) {
+        const type = url.split('.').pop();
         await down(url, filePath + `.${type}`)
       }
       isDownloaded(songs.length, call)
