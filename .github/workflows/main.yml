@@ -39,7 +39,7 @@ jobs:
 
       - name: Upload Release Assets
         run: |
-          for file in ./pkg/*; do
+          for file in ./release/*; do
             echo "Uploading $file..."
             gh asset upload ${{ steps.create_release.outputs.upload_url }} "$file"
           done
