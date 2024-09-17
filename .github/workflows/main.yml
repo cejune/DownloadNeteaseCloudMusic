@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+env:
+  env_var: ${{ vars.server }}
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -19,7 +22,10 @@ jobs:
       #     node-version: 20
 
       - name: Install Dependencies
-        run:  echo "SERVER=${{ vars.SERVER }}"
+        run: |
+          echo "repository variable : $SERVER"
+          echo "organization variable : $SERVER2"
+          echo "variable from shell environment : $env_var"
 
       # - name: Install Dependencies
       #   run: npm install
