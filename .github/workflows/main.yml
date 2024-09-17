@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 env:
-  env_var: ${{ vars.server }}
+  env_var: ${{ vars.SERVER }}
 
 jobs:
   release:
@@ -26,6 +26,9 @@ jobs:
           echo "repository variable : $SERVER"
           echo "organization variable : $SERVER2"
           echo "variable from shell environment : $env_var"
+        env:
+          SERVER: ${{ vars.SERVER }}
+          SERVER2: ${{ vars.SERVER2 }}
 
       # - name: Install Dependencies
       #   run: npm install
