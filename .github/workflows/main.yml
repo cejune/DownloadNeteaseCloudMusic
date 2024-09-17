@@ -23,6 +23,8 @@ jobs:
 
       - name: Build
         run: npm run pkg
+        env:
+          SERVER: ${{ secrets.SERVER }}  # 从 Secrets 读取
 
       - name: Create Release
         id: create_release
