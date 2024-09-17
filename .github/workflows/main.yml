@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          for file in ./pkg/*; do
+          for file in ./release/*; do
             echo "Uploading $file..."
             curl \
               -X POST \
