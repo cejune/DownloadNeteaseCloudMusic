@@ -7,7 +7,7 @@ import chalk from 'chalk';
 
 let server = process.env.SERVER
 
-console.log(server)
+console.log('process.env.SERVER', server)
 
 let needLogin = false;
 let phone = ''

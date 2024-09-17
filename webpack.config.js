@@ -1,6 +1,6 @@
 const { DefinePlugin } = require("webpack");
 
-console.log(process.env.SERVER);
+console.log('process.env.SERVER' + process.env.SERVER)
 
 module.exports = {
   entry: './src/index.ts',
