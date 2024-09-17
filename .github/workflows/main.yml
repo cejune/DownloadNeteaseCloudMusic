@@ -24,7 +24,7 @@ jobs:
       - name: Build
         run: npm run pkg
         env:
-          SERVER: ${{ secrets.SERVER }}  # 从 Secrets 读取
+          SERVER: ${{ vars.SERVER }}  # 从 Secrets 读取
 
       - name: Create Release
         id: create_release
@@ -48,21 +48,23 @@ jobs:
           asset_path: ./release/DownloadMusic-win-x64.exe
           asset_name: DownloadMusic-win-x64.exe
           asset_content_type: application/x-msdownload
-      - name: Upload to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/DownloadMusic-linux-x64
-          asset_name: DownloadMusic-linux-x64
-          asset_content_type: application/octet-stream
-      - name: Upload to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/DownloadMusic-mac-x64
-          asset_name: DownloadMusic-mac-x64
-          asset_content_type: application/octet-stream
+
+      # - name: Upload to Release
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: ./release/DownloadMusic-linux-x64
+      #     asset_name: DownloadMusic-linux-x64
+      #     asset_content_type: application/octet-stream
+
+      # - name: Upload to Release
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: ./release/DownloadMusic-mac-x64
+      #     asset_name: DownloadMusic-mac-x64
+      #     asset_content_type: application/octet-stream
