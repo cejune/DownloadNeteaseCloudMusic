@@ -1,3 +1,6 @@
+const { DefinePlugin } = require("webpack");
+
+console.log(process.env.server);
 
 module.exports = {
   entry: './src/index.ts',
@@ -16,4 +19,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new DefinePlugin({
+      'process.env.server': JSON.stringify(process.env.server || '127.0.0.1:3000')
+    })
+  ]
 }

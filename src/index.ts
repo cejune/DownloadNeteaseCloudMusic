@@ -5,7 +5,7 @@ import { join } from "path";
 import inquirer from "inquirer";
 import chalk from 'chalk';
 
-let server = '127.0.0.1:3000'
+let server = process.env.server
 
 let needLogin = false;
 let phone = ''
